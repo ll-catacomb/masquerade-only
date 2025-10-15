@@ -45,13 +45,11 @@ export default function Home() {
       {/* Center - Full Height GIF */}
       <div className="w-full lg:w-[400px] xl:w-[500px] h-[400px] lg:h-auto relative">
         <div className="absolute inset-0">
-          <Image
-            src="/masquerade.gif"
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://i.imgur.com/TbLZRlq.gif"
             alt="Masquerade"
-            fill
-            className="object-cover opacity-90"
-            priority
-            unoptimized
+            className="w-full h-full object-cover opacity-90"
           />
           {/* Glitch overlay */}
           <div className="absolute inset-0 bg-black/10 mix-blend-overlay" />
