@@ -1,103 +1,95 @@
-import Image from "next/image";
+'use client';
+
+import { useState } from 'react';
+import Image from 'next/image';
+import RSVPForm from './components/RSVPForm';
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [activeForm, setActiveForm] = useState<'workshop' | 'party' | null>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  return (
+    <div className="min-h-screen bg-black overflow-hidden relative flex flex-col lg:flex-row">
+      {/* Sound wave lines - glitch effect */}
+      <div className="absolute inset-0 pointer-events-none opacity-20">
+        <div className="absolute top-[20%] left-0 w-full h-[1px] bg-cream animate-pulse" />
+        <div className="absolute top-[40%] left-0 w-full h-[2px] bg-cream opacity-30" />
+        <div className="absolute top-[60%] left-0 w-full h-[1px] bg-cream animate-pulse" style={{ animationDelay: '0.5s' }} />
+        <div className="absolute top-[80%] left-0 w-full h-[1px] bg-cream opacity-40" />
+      </div>
+
+      {/* Left Column - Workshop */}
+      <div className="flex-1 flex flex-col items-center justify-center px-6 lg:px-12 py-12 relative z-10">
+        <div className="max-w-sm space-y-8">
+          <div className="space-y-4">
+            <p className="font-mono text-cream text-xs tracking-widest opacity-60">ISSUE 01_</p>
+            <h2 className="font-serif text-5xl lg:text-6xl text-cream leading-tight">
+              Mask<br/>Making
+            </h2>
+          </div>
+          
+          <div className="space-y-3 font-mono text-sm text-cream/80">
+            <p className="tracking-wider">WORKSHOP SESSION</p>
+            <p className="text-cream">October 24th, 2025</p>
+            <p className="tracking-widest">17:30 HRS</p>
+          </div>
+
+          <button
+            onClick={() => setActiveForm('workshop')}
+            className="border border-cream text-cream font-mono text-xs tracking-widest px-6 py-3 hover:bg-cream hover:text-black transition-all duration-300"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            [ RSVP ]
+          </button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+      </div>
+
+      {/* Center - Full Height GIF */}
+      <div className="w-full lg:w-[400px] xl:w-[500px] h-[400px] lg:h-auto relative">
+        <div className="absolute inset-0">
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="/masquerade.gif"
+            alt="Masquerade"
+            fill
+            className="object-cover opacity-90"
+            priority
+            unoptimized
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          {/* Glitch overlay */}
+          <div className="absolute inset-0 bg-black/10 mix-blend-overlay" />
+        </div>
+      </div>
+
+      {/* Right Column - Party */}
+      <div className="flex-1 flex flex-col items-center justify-center px-6 lg:px-12 py-12 relative z-10 order-3">
+        <div className="max-w-sm space-y-8">
+          <div className="space-y-4">
+            <p className="font-mono text-cream text-xs tracking-widest opacity-60">CONTINUOUS OPERATION</p>
+            <h2 className="font-serif text-5xl lg:text-6xl text-cream leading-tight">
+              Masque-<br/>rade
+            </h2>
+          </div>
+          
+          <div className="space-y-3 font-mono text-sm text-cream/80">
+            <p className="tracking-wider">EVENING ASSEMBLY</p>
+            <p className="text-cream">October 24th, 2025</p>
+            <p className="tracking-widest">22:00 HRS</p>
+          </div>
+
+          <button
+            onClick={() => setActiveForm('party')}
+            className="border border-cream text-cream font-mono text-xs tracking-widest px-6 py-3 hover:bg-cream hover:text-black transition-all duration-300"
+          >
+            [ RSVP ]
+          </button>
+        </div>
+      </div>
+
+      {/* RSVP Form Modal */}
+      {activeForm && (
+        <RSVPForm
+          eventType={activeForm}
+          onClose={() => setActiveForm(null)}
+        />
+      )}
     </div>
   );
 }
