@@ -1,92 +1,109 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import RSVPForm from './components/RSVPForm';
+import GlitchText from './components/GlitchText';
 
 export default function Home() {
-  const [activeForm, setActiveForm] = useState<'workshop' | 'party' | null>(null);
+  const [showForm, setShowForm] = useState(false);
 
   return (
     <div className="min-h-screen bg-black overflow-hidden relative flex flex-col lg:flex-row">
-      {/* Sound wave lines - glitch effect */}
-      <div className="absolute inset-0 pointer-events-none opacity-20">
-        <div className="absolute top-[20%] left-0 w-full h-[1px] bg-cream animate-pulse" />
-        <div className="absolute top-[40%] left-0 w-full h-[2px] bg-cream opacity-30" />
-        <div className="absolute top-[60%] left-0 w-full h-[1px] bg-cream animate-pulse" style={{ animationDelay: '0.5s' }} />
-        <div className="absolute top-[80%] left-0 w-full h-[1px] bg-cream opacity-40" />
-      </div>
 
-      {/* Left Column - Workshop */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 lg:px-12 py-12 relative z-10">
-        <div className="max-w-sm space-y-8">
-          <div className="space-y-4">
-            <p className="font-mono text-cream text-xs tracking-widest opacity-60">ISSUE 01_</p>
-            <h2 className="font-serif text-5xl lg:text-6xl text-cream leading-tight">
-              Mask<br/>Making
-            </h2>
-          </div>
-          
-          <div className="space-y-3 font-mono text-sm text-cream/80">
-            <p className="tracking-wider">WORKSHOP SESSION</p>
-            <p className="text-cream">October 24th, 2025</p>
-            <p className="tracking-widest">17:30 HRS</p>
-          </div>
-
-          <button
-            onClick={() => setActiveForm('workshop')}
-            className="border border-cream text-cream font-mono text-xs tracking-widest px-6 py-3 hover:bg-cream hover:text-black transition-all duration-300"
-          >
-            [ RSVP ]
-          </button>
-        </div>
-      </div>
-
-      {/* Center - Full Height GIF */}
-      <div className="w-full lg:w-[400px] xl:w-[500px] h-[400px] lg:h-auto relative">
-        <div className="absolute inset-0">
+      <div className="w-full h-screen flex flex-col lg:flex-row relative">
+        {/* Left - Full Bleed GIF */}
+        <div className="w-full lg:w-1/2 relative h-full">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="https://i.imgur.com/TbLZRlq.gif"
+            src="/masquerade01.gif"
             alt="Masquerade"
-            className="w-full h-full object-cover opacity-90"
+            className="absolute inset-0 w-full h-full object-cover"
           />
           {/* Glitch overlay */}
-          <div className="absolute inset-0 bg-black/10 mix-blend-overlay" />
+          <div className="absolute inset-0 bg-white/5 mix-blend-overlay animate-pulse" />
+          
+          {/* Random glitch bars */}
+          <div className="absolute top-[20%] left-0 w-full h-[2px] bg-white/30 animate-pulse" />
+          <div className="absolute top-[60%] left-0 w-full h-[3px] bg-white/20" style={{ animationDelay: '0.7s' }} />
         </div>
-      </div>
 
-      {/* Right Column - Party */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 lg:px-12 py-12 relative z-10 order-3">
-        <div className="max-w-sm space-y-8">
+        {/* Vertical Glitchy Running Text Border */}
+        <div className="hidden lg:block absolute left-1/2 top-0 h-full w-[4px] bg-white/30 overflow-hidden">
+          <div className="absolute inset-0 flex flex-col items-center justify-start py-4 animate-scroll">
+            <GlitchText 
+              text="MASQUERADE_MASQUERADE_MASQUERADE_MASQUERADE_MASQUERADE_MASQUERADE_MASQUERADE_MASQUERADE_MASQUERADE_MASQUERADE_"
+              className="font-mono text-white text-sm tracking-widest opacity-80 transform -rotate-90 origin-center whitespace-nowrap"
+              glitchChance={0.08}
+            />
+          </div>
+        </div>
+
+        {/* Right - Content */}
+        <div className="w-full lg:w-1/2 flex flex-col items-start justify-center space-y-8 px-12 lg:px-16 xl:px-24">
           <div className="space-y-4">
-            <p className="font-mono text-cream text-xs tracking-widest opacity-60">CONTINUOUS OPERATION</p>
-            <h2 className="font-serif text-5xl lg:text-6xl text-cream leading-tight">
-              Masque-<br/>rade
-            </h2>
+            <GlitchText 
+              text="SYSTEM_ALERT_" 
+              className="font-mono text-white text-xs tracking-widest opacity-60"
+              glitchChance={0.05}
+            />
+            <h1 className="font-serif text-6xl lg:text-7xl text-white leading-tight">
+              <GlitchText 
+                text="Masquerade" 
+                glitchChance={0.02}
+              />
+            </h1>
           </div>
           
-          <div className="space-y-3 font-mono text-sm text-cream/80">
-            <p className="tracking-wider">EVENING ASSEMBLY</p>
-            <p className="text-cream">October 24th, 2025</p>
-            <p className="tracking-widest">22:00 HRS</p>
+          <div className="space-y-3 font-mono text-sm text-white/80">
+            <GlitchText 
+              text="EVENING_PROTOCOL" 
+              className="tracking-wider block"
+              glitchChance={0.04}
+            />
+            <p className="text-white">October 24th, 2025</p>
+            <GlitchText 
+              text="22:00_HRS" 
+              className="tracking-widest block"
+              glitchChance={0.04}
+            />
+            <div className="pt-2 border-t border-white/20 mt-4">
+              <p className="text-white/60 text-xs tracking-wider">LOCATION:</p>
+              <p className="text-white text-sm">Adams Pool Theater</p>
+              <p className="text-white/40 text-xs italic mt-1">Unseen space, hasn't been open in nearly a decade</p>
+            </div>
           </div>
 
-          <button
-            onClick={() => setActiveForm('party')}
-            className="border border-cream text-cream font-mono text-xs tracking-widest px-6 py-3 hover:bg-cream hover:text-black transition-all duration-300"
-          >
-            [ RSVP ]
-          </button>
+          <div className="space-y-4 w-full">
+            <button
+              onClick={() => setShowForm(true)}
+              className="border-2 border-white text-white font-mono text-xs tracking-widest px-8 py-4 hover:bg-white hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.5)]"
+            >
+              <GlitchText text="[ RSVP_NOW ]" glitchChance={0.03} />
+            </button>
+            
+            <p className="font-mono text-white/40 text-xs tracking-wider">
+              <GlitchText 
+                text="MASKS_REQUIRED // IDENTITY_OPTIONAL" 
+                glitchChance={0.02}
+              />
+            </p>
+
+            {/* Map Image */}
+            <div className="w-[200px] mt-4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/map.png"
+                alt="Map to Adams Pool Theater"
+                className="w-full h-auto border border-white/30 shadow-[0_0_15px_rgba(255,255,255,0.2)]"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
       {/* RSVP Form Modal */}
-      {activeForm && (
-        <RSVPForm
-          eventType={activeForm}
-          onClose={() => setActiveForm(null)}
-        />
+      {showForm && (
+        <RSVPForm onClose={() => setShowForm(false)} />
       )}
     </div>
   );

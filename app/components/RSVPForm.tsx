@@ -3,11 +3,10 @@
 import { useState } from 'react';
 
 interface RSVPFormProps {
-  eventType: 'workshop' | 'party';
   onClose: () => void;
 }
 
-export default function RSVPForm({ eventType, onClose }: RSVPFormProps) {
+export default function RSVPForm({ onClose }: RSVPFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,10 +14,6 @@ export default function RSVPForm({ eventType, onClose }: RSVPFormProps) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-
-  const eventDetails = eventType === 'workshop' 
-    ? { title: 'Mask Making Workshop', time: 'October 24th, 2025 • 5:30 PM' }
-    : { title: 'Masquerade Party', time: 'October 24th, 2025 • 10:00 PM' };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,10 +26,7 @@ export default function RSVPForm({ eventType, onClose }: RSVPFormProps) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...formData,
-          eventType,
-        }),
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
@@ -55,54 +47,54 @@ export default function RSVPForm({ eventType, onClose }: RSVPFormProps) {
 
   return (
     <div className="fixed inset-0 bg-black/95 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-black border border-cream max-w-md w-full p-8 relative">
+      <div className="bg-black border-2 border-white max-w-md w-full p-8 relative shadow-[0_0_30px_rgba(255,255,255,0.3)]">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-cream hover:text-cream/60 text-2xl font-mono"
+          className="absolute top-4 right-4 text-white hover:text-white/60 text-2xl font-mono"
         >
           ×
         </button>
 
-        <h2 className="font-serif text-3xl text-cream mb-2">{eventDetails.title}</h2>
-        <p className="font-mono text-cream/60 text-xs tracking-wider mb-8">{eventDetails.time}</p>
+        <h2 className="font-serif text-3xl text-white mb-2">Masquerade Party</h2>
+        <p className="font-mono text-white/60 text-xs tracking-wider mb-8">October 24th, 2025 • 10:00 PM</p>
 
         {submitStatus === 'success' ? (
           <div className="text-center py-8">
-            <p className="font-mono text-cream text-sm tracking-widest mb-2">CONFIRMED</p>
-            <p className="font-serif text-cream/60 italic">See you there...</p>
+            <p className="font-mono text-white text-sm tracking-widest mb-2">CONFIRMED</p>
+            <p className="font-serif text-white/60 italic">See you there...</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block font-mono text-cream/60 text-xs tracking-wider mb-2">NAME</label>
+              <label className="block font-mono text-white/60 text-xs tracking-wider mb-2">NAME</label>
               <input
                 type="text"
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full bg-black border border-cream/30 px-4 py-2 text-cream focus:border-cream focus:outline-none font-serif"
+                className="w-full bg-black border border-white/30 px-4 py-2 text-white focus:border-white focus:outline-none font-serif"
               />
             </div>
 
             <div>
-              <label className="block font-mono text-cream/60 text-xs tracking-wider mb-2">EMAIL</label>
+              <label className="block font-mono text-white/60 text-xs tracking-wider mb-2">EMAIL</label>
               <input
                 type="email"
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full bg-black border border-cream/30 px-4 py-2 text-cream focus:border-cream focus:outline-none font-serif"
+                className="w-full bg-black border border-white/30 px-4 py-2 text-white focus:border-white focus:outline-none font-serif"
               />
             </div>
 
             <div>
-              <label className="block font-mono text-cream/60 text-xs tracking-wider mb-2">HOUSE</label>
+              <label className="block font-mono text-white/60 text-xs tracking-wider mb-2">HOUSE</label>
               <input
                 type="text"
                 required
                 value={formData.house}
                 onChange={(e) => setFormData({ ...formData, house: e.target.value })}
-                className="w-full bg-black border border-cream/30 px-4 py-2 text-cream focus:border-cream focus:outline-none font-serif"
+                className="w-full bg-black border border-white/30 px-4 py-2 text-white focus:border-white focus:outline-none font-serif"
                 placeholder="Your house name"
               />
             </div>
@@ -114,7 +106,7 @@ export default function RSVPForm({ eventType, onClose }: RSVPFormProps) {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full border border-cream text-cream font-mono text-xs tracking-widest py-3 hover:bg-cream hover:text-black transition-all duration-300 disabled:opacity-50"
+              className="w-full border-2 border-white text-white font-mono text-xs tracking-widest py-3 hover:bg-white hover:text-black transition-all duration-300 disabled:opacity-50 shadow-[0_0_15px_rgba(255,255,255,0.2)]"
             >
               {isSubmitting ? 'SUBMITTING...' : '[ CONFIRM ]'}
             </button>

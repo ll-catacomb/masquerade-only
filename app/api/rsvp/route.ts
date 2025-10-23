@@ -3,10 +3,10 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, house, eventType } = body;
+    const { name, email, house } = body;
 
     // Validate required fields
-    if (!name || !email || !house || !eventType) {
+    if (!name || !email || !house) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
             name: name,
             email: email,
             house: house,
-            event: [eventType === 'workshop' ? 'workshop' : 'party'],
+            event: ['party'],
           },
         }),
       }

@@ -22,3 +22,16 @@ body {
   font-family: 'Crimson Text', Georgia, serif;
   overflow-x: hidden;
 }
+
+@keyframes scroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+}
